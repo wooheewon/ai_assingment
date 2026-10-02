@@ -1,0 +1,214 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI과제</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--tx:#1d2330;--mut:#667085;--bd:#e3e6ec;--c1:#2563eb;--c2:#d97706;--c3:#059669;--up:#059669;--dn:#dc2626;--mk:#7c3aed;--bn-bg:#eef4ff;--bn-tx:#1e3a8a;--bn-bd:#c7d7f5;--hi:#fde8e8;--md:#fff3d6;--lo:#eef0f4;--imp:#c62828}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12151c;--card:#1b2029;--tx:#e8ebf1;--mut:#9aa3b2;--bd:#2c3340;--c1:#60a5fa;--c2:#fbbf24;--c3:#34d399;--up:#34d399;--dn:#f87171;--mk:#a78bfa;--bn-bg:#1a2742;--bn-tx:#b9cdf6;--bn-bd:#2f4470;--hi:#4a2226;--md:#463a17;--lo:#262c38;--imp:#ff8a80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12151c;--card:#1b2029;--tx:#e8ebf1;--mut:#9aa3b2;--bd:#2c3340;--c1:#60a5fa;--c2:#fbbf24;--c3:#34d399;--up:#34d399;--dn:#f87171;--mk:#a78bfa;--bn-bg:#1a2742;--bn-tx:#b9cdf6;--bn-bd:#2f4470;--hi:#4a2226;--md:#463a17;--lo:#262c38;--imp:#ff8a80;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 system-ui,"Malgun Gothic",sans-serif}
+.w{max-width:1100px;margin:0 auto;padding-inline:16px;padding-block:24px 60px}
+h1{font-size:22px;margin:0 0 4px;text-wrap:balance}h2{font-size:17px;margin:34px 0 10px}
+.sub{color:var(--mut);font-size:13px}
+.banner{background:var(--bn-bg);color:var(--bn-tx);border:1px solid var(--bn-bd);border-radius:8px;padding:8px 12px;font-size:13px;margin:12px 0}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;min-width:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums}.kpi span{font-size:12px;color:var(--mut)}
+ul.l{margin:0;padding-left:20px}ul.l li{margin:3px 0}
+svg{width:100%;height:auto;display:block}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{padding:7px 8px;border-bottom:1px solid var(--bd);text-align:right;vertical-align:top}
+.tbl th{color:var(--mut);font-weight:600;white-space:nowrap}
+.tbl .l{text-align:left}.tbl td.l{min-width:180px}
+.sc{overflow-x:auto}
+.up{color:var(--up)}.dn{color:var(--dn)}
+.tag{font-size:11px;padding:1px 7px;border-radius:99px;border:1px solid var(--bd);color:var(--mut);font-weight:400}
+.pill{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;font-weight:600;color:var(--tx)}
+.p-hi{background:var(--hi)}.p-md{background:var(--md)}.p-lo{background:var(--lo);color:var(--mut)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.leg{display:flex;gap:14px;font-size:12px;color:var(--mut);margin:0 0 8px;flex-wrap:wrap}
+.leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px}
+.mlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px 16px;font-size:12.5px;margin-top:10px}
+.mlist span.n{display:inline-block;min-width:20px;height:20px;line-height:20px;text-align:center;border-radius:50%;background:var(--mk);color:#fff;font-size:11px;margin-right:6px}
+.imp{color:var(--imp);font-weight:700}
+.note{font-size:12px;color:var(--mut);margin-top:8px}
+button{font:inherit;font-size:13px;padding:5px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--card);color:var(--tx);cursor:pointer}
+button:focus-visible{outline:2px solid var(--c1);outline-offset:2px}
+details summary{cursor:pointer;font-weight:600}
+</style></head><body>
+<div class="w">
+<h1>RAID: Shadow Legends의 2025.09.29 ~ 2026.09.27 중 업데이트 내용과 주요 수치 영향 비교</h1>
+<div class="sub">수치: 제공 CSV(전 국가, App Store+Google Play 합산, 주 단위) · 업데이트: Plarium 공식 포럼 News(2026-10-01 수집)</div>
+<div class="banner">마지막 주(09-28 시작)는 집계가 덜 끝난 값이라 분석에서 뺐습니다. 포럼 게시일은 실제 배포일과 다를 수 있어서(아래 ⑥ 참고), 업데이트와 수치는 "같은 주 또는 직전 주" 기준으로 대응시켰습니다. 인과가 아니라 시점의 일치입니다.</div>
+
+<h2>요약</h2>
+<div class="card"><ul class="l" id="sum"></ul></div>
+<div class="kpis" id="kpis"></div>
+
+<h2>① 주간 추이와 업데이트 시점</h2>
+<div class="card"><div class="leg"><span><i style="background:var(--c1)"></i>WAU</span><span><i style="background:var(--c2)"></i>매출($)</span><span><i style="background:var(--c3)"></i>다운로드</span><span><i style="background:var(--mk)"></i>번호 = 주요 업데이트·이벤트</span></div>
+<svg id="ch" viewBox="0 0 1000 640" role="img" aria-label="주간 WAU, 매출, 다운로드 추이와 업데이트 시점"></svg>
+<div class="mlist" id="mlist"></div></div>
+
+<h2>② 크게 튄 시점과 코멘트</h2>
+<div class="card sc"><table class="tbl" id="spk"></table><div class="note">기준: 지표별 전주 대비 변동이 평균에서 표준편차 1.5배 이상 벗어난 주.</div></div>
+
+<h2>③ 공통 사항</h2>
+<div class="grid2" id="pat"></div>
+
+<h2>④ 월별 업데이트와 영향</h2>
+<div class="card sc"><table class="tbl" id="mon"></table><div class="note">증감은 전월 대비 주평균 변화. 주간 최대는 그 달 안에서 전주 대비 가장 크게 오른 값/내린 값. 영향도는 그 달 업데이트·이벤트 시작 주와 다음 주의 최대 변동이 평소 변동폭의 몇 배인지로 정했습니다(상 2배 이상, 중 1배 이상, 하 그 미만).</div></div>
+
+<h2>⑤ 추가 분석</h2>
+<div class="grid2">
+<div class="card"><b>이용자당 매출 (주 매출 ÷ WAU)</b><svg id="arp" viewBox="0 0 420 150"></svg><div class="note" id="arpn"></div></div>
+<div class="card"><b>이벤트 유형별 평균 변화 (전주 대비)</b><div class="sc"><table class="tbl" id="typ"></table></div><div class="note">해당 유형의 이벤트 시작 주만 모아 평균. 표본이 작아서 참고용입니다.</div></div>
+<div class="card"><b>국가별 비중 (매출 상위 10, 기간 합계)</b><div class="sc"><table class="tbl" id="cty"></table></div></div>
+<div class="card"><b>플랫폼별 비중</b><div class="sc"><table class="tbl" id="plt"></table></div><div class="note">Google Play는 이용자가 많고(WAU 74%), 매출은 App Store 쪽이 이용자 비중보다 큽니다(41%).</div></div>
+</div>
+
+<h2>⑥ 수집한 업데이트·이벤트 전체 목록</h2>
+<div class="card sc"><table class="tbl" id="evt"></table>
+<div class="note">출처: forum.plarium.com/raid-shadow-legends/843_news (총 55페이지 중 54페이지 수집, 이 기간 게시물 117건 확인). 페이스북 공식 페이지는 로그인 없이 게시물이 읽히지 않아 반영하지 못했습니다.
+포럼 게시일이 맞지 않아 제외한 글: 10.30.0, 10.40.0, 10.55.0(×2), 10.70.0(×2), 10.10, 6.40 업데이트 글과 제목의 날짜가 게시일과 맞지 않는 옛 Digest(2021~2025 날짜). 새 포럼으로 옮기면서 날짜가 다시 붙은 글로 보입니다. 10.90.0과 11.10~11.30.0 글도 게시일이 하이라이트 글보다 늦어 배포일보다 뒤일 수 있습니다.</div></div>
+
+<h2>⑦ 주간 원자료</h2>
+<div class="card"><button id="cp" type="button">CSV 복사</button> <span class="note" id="cpm"></span>
+<details><summary>주간 표 펼치기</summary><div class="sc"><table class="tbl" id="raw"></table></div></details>
+<div class="note">국가·플랫폼별 주간 CSV(약 8천 행)는 이 페이지와 함께 게시된 data/raid_weekly_by_country.csv 입니다.</div></div>
+</div>
+<script>
+const D=[{"d":"2025-09-29","wau":711190,"dl":172736,"rev":3382457},{"d":"2025-10-06","wau":681542,"dl":136820,"rev":3087495},{"d":"2025-10-13","wau":666342,"dl":137948,"rev":3787856},{"d":"2025-10-20","wau":677266,"dl":180495,"rev":2912624},{"d":"2025-10-27","wau":647862,"dl":133576,"rev":3525244},{"d":"2025-11-03","wau":624279,"dl":107502,"rev":3583631},{"d":"2025-11-10","wau":573048,"dl":83550,"rev":2842200},{"d":"2025-11-17","wau":543071,"dl":76955,"rev":1869715},{"d":"2025-11-24","wau":560785,"dl":140134,"rev":3574726},{"d":"2025-12-01","wau":533965,"dl":102304,"rev":3686626},{"d":"2025-12-08","wau":570918,"dl":110043,"rev":2237167},{"d":"2025-12-15","wau":593913,"dl":112917,"rev":2086123},{"d":"2025-12-22","wau":614828,"dl":113418,"rev":3472625},{"d":"2025-12-29","wau":634755,"dl":113289,"rev":2628741},{"d":"2026-01-05","wau":677877,"dl":159916,"rev":2780197},{"d":"2026-01-12","wau":717701,"dl":147391,"rev":2331585},{"d":"2026-01-19","wau":723133,"dl":111346,"rev":3092992},{"d":"2026-01-26","wau":701428,"dl":99201,"rev":2475166},{"d":"2026-02-02","wau":662617,"dl":96902,"rev":2302947},{"d":"2026-02-09","wau":630216,"dl":103672,"rev":2296313},{"d":"2026-02-16","wau":605354,"dl":106270,"rev":2550355},{"d":"2026-02-23","wau":571040,"dl":98228,"rev":2280107},{"d":"2026-03-02","wau":556795,"dl":107513,"rev":3615876},{"d":"2026-03-09","wau":563601,"dl":110841,"rev":2735969},{"d":"2026-03-16","wau":570136,"dl":92048,"rev":2833191},{"d":"2026-03-23","wau":567581,"dl":86401,"rev":2109534},{"d":"2026-03-30","wau":553314,"dl":83756,"rev":2079996},{"d":"2026-04-06","wau":532035,"dl":79940,"rev":1979945},{"d":"2026-04-13","wau":514698,"dl":73006,"rev":1955494},{"d":"2026-04-20","wau":505898,"dl":72780,"rev":1648886},{"d":"2026-04-27","wau":502193,"dl":75186,"rev":1914485},{"d":"2026-05-04","wau":520917,"dl":77468,"rev":1656564},{"d":"2026-05-11","wau":532364,"dl":76089,"rev":2476324},{"d":"2026-05-18","wau":545411,"dl":82955,"rev":1795058},{"d":"2026-05-25","wau":563149,"dl":80934,"rev":1523852},{"d":"2026-06-01","wau":565914,"dl":77291,"rev":2714986},{"d":"2026-06-08","wau":564557,"dl":76589,"rev":2015545},{"d":"2026-06-15","wau":566878,"dl":76330,"rev":1478250},{"d":"2026-06-22","wau":541207,"dl":84968,"rev":2102921},{"d":"2026-06-29","wau":548701,"dl":113215,"rev":1617116},{"d":"2026-07-06","wau":553451,"dl":90984,"rev":1712791},{"d":"2026-07-13","wau":537963,"dl":80948,"rev":1674848},{"d":"2026-07-20","wau":533564,"dl":86263,"rev":1725969},{"d":"2026-07-27","wau":528749,"dl":99229,"rev":1865971},{"d":"2026-08-03","wau":526710,"dl":99109,"rev":1892827},{"d":"2026-08-10","wau":506726,"dl":80320,"rev":1560985},{"d":"2026-08-17","wau":554105,"dl":260906,"rev":1981672},{"d":"2026-08-24","wau":561224,"dl":129172,"rev":2172994},{"d":"2026-08-31","wau":523786,"dl":79564,"rev":2557017},{"d":"2026-09-07","wau":522768,"dl":83888,"rev":1608857},{"d":"2026-09-14","wau":527767,"dl":84120,"rev":1782578},{"d":"2026-09-21","wau":508630,"dl":90396,"rev":1408767},{"d":"2026-09-28","wau":504964,"dl":38884,"rev":670058}];
+const BRK={"pl":[{"p":"Google Play","rev":59.3,"wau":73.5,"dl":65.8},{"p":"App Store","rev":40.7,"wau":26.5,"dl":34.2}],"top":[{"c":"US","rev":45996909,"revp":37.4,"wau":27.9,"dl":33.1},{"c":"DE","rev":13073475,"revp":10.6,"wau":8.3,"dl":4.8},{"c":"GB","rev":10743559,"revp":8.7,"wau":3.5,"dl":4.7},{"c":"CA","rev":6423021,"revp":5.2,"wau":1,"dl":2.3},{"c":"FR","rev":5736023,"revp":4.7,"wau":3.1,"dl":5.5},{"c":"AU","rev":5409964,"revp":4.4,"wau":1.3,"dl":1.5},{"c":"KR","rev":2914552,"revp":2.4,"wau":0.6,"dl":2.1},{"c":"UA","rev":2911683,"revp":2.4,"wau":1.5,"dl":1.7},{"c":"JP","rev":2874321,"revp":2.3,"wau":1.9,"dl":2},{"c":"NL","rev":1754829,"revp":1.4,"wau":0.7,"dl":0.7}]};
+// [날짜, 유형(U 업데이트, T 테마·콜라보, E 챔피언·퓨전), 주요 여부, 내용]
+const EV=[
+["2025-10-07","U",1,"10.80.0 · QoL, 아레나 플래티넘 컷오프 리셋"],
+["2025-10-23","E",0,"10월 챔피언 공개(핼러윈 테마)"],
+["2025-11-12","U",0,"10.90 하이라이트 · 라이브 아레나 개선"],
+["2025-11-29","T",1,"에일리언·프레데터 콜라보 스킬 공개, Kroz 조각 이벤트"],
+["2025-12-08","U",1,"11.00 하이라이트 · Grim Forest 신규 모드"],
+["2025-12-13","U",0,"11.00.0 배포 · Grim Forest, 신규 장비 세트, 챔피언 리밸런스"],
+["2025-12-28","E",0,"Yukimasa 퓨전 이벤트"],
+["2026-01-12","U",0,"10.90.0 글 게시(게시일 불일치 가능)"],
+["2026-01-27","E",0,"Kassandra 퓨전 이벤트(어쌔신 크리드)"],
+["2026-02-06","U",0,"11.10·11.20 하이라이트"],
+["2026-02-18","T",1,"어쌔신 크리드 챔피언 합류"],
+["2026-03-05","U",1,"11.30 하이라이트 · Argonites 팩션, 7주년 준비"],
+["2026-03-08","E",0,"7주년 Pelops 퓨전"],
+["2026-03-31","U",0,"11.10.0 글 게시 · 챔피언 리밸런스"],
+["2026-04-01","U",0,"11.20.0 글 게시 · 프렌들리 시즈"],
+["2026-04-05","T",1,"악마 연합(Demon Coalition) 이벤트, Mavara 퓨전, Community Weeks"],
+["2026-04-15","U",0,"11.30.0 글 게시 · 프렌들리 배틀, 퓨전 변경"],
+["2026-04-26","U",0,"11.40 하이라이트 · 신규 연합 이벤트"],
+["2026-05-07","U",0,"11.50 하이라이트 · 자동 등반, 보물 티켓"],
+["2026-05-19","T",1,"스켈레터·히맨 복귀(마스터 오브 더 유니버스)"],
+["2026-05-24","U",0,"11.40.0 글 게시 · 구독 변경, 라이브 아레나 일정 변경"],
+["2026-05-27","U",0,"11.50.0 글 게시 · 보물 티켓, 장비 자동 착용, 둠 타워 자동 등반"],
+["2026-06-11","U",1,"11.60 하이라이트 · Web of Corruption 대형 이벤트"],
+["2026-07-03","U",0,"11.65 하이라이트 · 이벤트 2단계, 라이브 아레나 신규 기능"],
+["2026-07-06","U",0,"신규 보석(Gemstones) 도입"],
+["2026-07-30","U",0,"11.60.0 글 게시 · 백그라운드 멀티배틀 확장, 웹 스토어 소식"],
+["2026-08-11","U",0,"11.70 하이라이트 · 챔피언 프로빙 그라운드"],
+["2026-08-19","T",1,"Echoes of Oz(오즈의 마법사) 대형 이벤트, 11.71 업데이트"],
+["2026-08-26","U",0,"11.65.0 글 게시 · 라이브 아레나 신규 이벤트, 매치메이킹"],
+["2026-09-02","U",0,"11.70.0 글 게시 · Cowardly Lion 퓨전"],
+["2026-09-20","U",1,"11.75.0 · 소환 개선, 버프 리밸런스"]
+];
+const f=n=>Math.round(n).toLocaleString("en-US"),pc=(a,b)=>(b-a)/a*100;
+const pcs=v=>`<span class="${v>=0?'up':'dn'}">${v>=0?'▲':'▼'} ${Math.abs(v).toFixed(1)}%</span>`;
+const L=D.slice(0,-1),K=["wau","rev","dl"],NM={wau:"WAU",rev:"매출",dl:"다운로드"};
+const TS=d=>new Date(d+"T00:00:00Z").getTime(),WK=7*864e5;
+const widx=d=>L.findIndex(x=>TS(d)>=TS(x.d)&&TS(d)<TS(x.d)+WK);
+const WOW={},ST={};K.forEach(k=>{const w=L.map((r,i)=>i?pc(L[i-1][k],r[k]):0);WOW[k]=w;const a=w.slice(1),m=a.reduce((p,q)=>p+q)/a.length;ST[k]={m,sd:Math.sqrt(a.reduce((p,q)=>p+(q-m)**2,0)/a.length)}});
+const zs=(k,i)=>(i>0&&i<L.length)?Math.abs(WOW[k][i]-ST[k].m)/ST[k].sd:0;
+const score=i=>Math.max(...K.map(k=>Math.max(zs(k,i),zs(k,i+1))));
+const E=EV.map((e,n)=>({d:e[0],c:e[1],m:e[2],t:e[3],i:widx(e[0]),s:null})).filter(e=>e.i>=0);E.forEach(e=>e.s=score(e.i));
+const imp=s=>s>=2?["상","hi"]:s>=1?["중","md"]:["하","lo"];
+const pill=s=>{const q=imp(s);return `<span class="pill p-${q[1]}">${q[0]}</span>`};
+const sum=k=>L.reduce((a,x)=>a+x[k],0),avg=k=>sum(k)/L.length,mx=k=>L.reduce((a,x)=>x[k]>a[k]?x:a);
+const H1=L.slice(0,26),H2=L.slice(26),av=(a,k)=>a.reduce((s,x)=>s+x[k],0)/a.length;
+document.getElementById("kpis").innerHTML=[
+["WAU 주평균",f(avg("wau")),`최고 ${f(mx("wau").wau)} (${mx("wau").d} 주)`],
+["매출 합계","$"+f(sum("rev")),`최고 주 $${f(mx("rev").rev)} (${mx("rev").d})`],
+["다운로드 합계",f(sum("dl")),`최고 주 ${f(mx("dl").dl)} (${mx("dl").d})`],
+["WAU 기간 변화",pcs(pc(L[0].wau,L.at(-1).wau)),`${f(L[0].wau)} → ${f(L.at(-1).wau)}`]
+].map(k=>`<div class="card kpi"><span>${k[0]}</span><b>${k[1]}</b><span>${k[2]}</span></div>`).join("");
+document.getElementById("sum").innerHTML=[
+`이용자(WAU)는 ${f(L[0].wau)}에서 ${f(L.at(-1).wau)}로 ${Math.abs(pc(L[0].wau,L.at(-1).wau)).toFixed(0)}% 줄었습니다. 2026년 1월 중순에 ${f(mx("wau").wau)}로 정점을 찍은 뒤 4월 말 50만 선까지 내려갔고, 그 뒤 50만 초중반에서 유지됩니다.`,
+`매출은 상반기 주평균 $${f(av(H1,"rev"))}에서 하반기 $${f(av(H2,"rev"))}로 ${Math.abs(pc(av(H1,"rev"),av(H2,"rev"))).toFixed(0)}% 줄었습니다. 튀는 주는 11월 말, 12월 말, 3월 초, 6월 초에 몰려 있습니다.`,
+`<b class="imp">가장 크게 튄 것은 2026-08-17 주의 다운로드(${f(mx("dl").dl)}, 전주 대비 +225%)이며, 같은 주에 Echoes of Oz 대형 이벤트와 11.71 업데이트가 있었습니다.</b> WAU도 +9.4%로 이 기간 최대 상승입니다.`,
+`QoL 위주 업데이트(10.80, 11.40 등)는 수치 변화가 작았고, 반응이 컸던 주는 에일리언 콜라보, Grim Forest, 7주년, 스켈레터 복귀, Echoes of Oz처럼 신규 모드나 콜라보 이벤트가 시작된 주였습니다.`
+].map(s=>`<li>${s}</li>`).join("");
+
+// 차트
+const W=1000,PL=70,PR=20,pw=W-PL-PR,ph=170,gap=44,tp=34;
+const x=i=>PL+i*pw/(L.length-1);let o="";
+const MJ=E.filter(e=>e.m);MJ.forEach((e,n)=>e.n=n+1);
+[["wau","WAU","--c1"],["rev","매출($)","--c2"],["dl","다운로드","--c3"]].forEach((p,pi)=>{
+ const y0=tp+pi*(ph+gap),M=Math.max(...L.map(r=>r[p[0]])),y=v=>y0+ph-v/M*ph;
+ o+=`<text x="${PL}" y="${y0-6}" font-size="12" fill="var(--mut)">${p[1]}</text>`;
+ [0,.5,1].forEach(t=>{o+=`<line x1="${PL}" x2="${W-PR}" y1="${y(M*t)}" y2="${y(M*t)}" stroke="var(--bd)"/><text x="${PL-6}" y="${y(M*t)+4}" font-size="11" text-anchor="end" fill="var(--mut)">${p[0]=="rev"?"$":""}${f(M*t/1000)}k</text>`});
+ MJ.forEach(e=>{o+=`<line x1="${x(e.i)}" x2="${x(e.i)}" y1="${y0}" y2="${y0+ph}" stroke="var(--mk)" stroke-dasharray="4 3" opacity=".7"/>`;if(pi==0)o+=`<circle cx="${x(e.i)}" cy="${y0-16}" r="9" fill="var(--mk)"/><text x="${x(e.i)}" y="${y0-12}" font-size="11" text-anchor="middle" fill="#fff">${e.n}</text>`});
+ o+=`<polyline fill="none" stroke="var(${p[2]})" stroke-width="2" points="${L.map((r,i)=>x(i)+","+y(r[p[0]])).join(" ")}"/>`;
+ const b=L.map((r,i)=>[r[p[0]],i]).sort((a,c)=>c[0]-a[0])[0];o+=`<circle cx="${x(b[1])}" cy="${y(b[0])}" r="4" fill="var(${p[2]})"/><text x="${x(b[1])+(b[1]>40?-8:8)}" y="${y(b[0])-8}" font-size="11" text-anchor="${b[1]>40?'end':'start'}" fill="var(--tx)">${p[0]=="rev"?"$":""}${f(b[0])}</text>`;
+ L.forEach((r,i)=>{o+=`<rect x="${x(i)-pw/L.length/2}" y="${y0}" width="${pw/L.length}" height="${ph}" fill="transparent"><title>${r.d} 주 · ${p[1]} ${p[0]=="rev"?"$":""}${f(r[p[0]])} (전주 대비 ${i?WOW[p[0]][i].toFixed(1)+"%":"-"})</title></rect>`});
+});
+const yb=tp+3*(ph+gap)-gap+18;
+L.forEach((r,i)=>{if(i%4==0)o+=`<text x="${x(i)}" y="${yb}" font-size="11" text-anchor="middle" fill="var(--mut)">${r.d.slice(2,7)}</text>`});
+const sv=document.getElementById("ch");sv.setAttribute("viewBox",`0 0 1000 ${yb+8}`);sv.innerHTML=o;
+document.getElementById("mlist").innerHTML=MJ.map(e=>`<div><span class="n">${e.n}</span>${e.d.slice(2)} · ${e.t}</div>`).join("");
+
+// ② 튄 시점
+const COM={
+"2025-11-10":"하락. 10월 핼러윈·TMNT 기간이 끝난 뒤 되돌림으로 보이며, 같은 주에 대응되는 큰 업데이트는 없음.",
+"2025-11-24":"매출 +91%, 다운로드 +82%. 11-29 에일리언·프레데터 콜라보 공개 직전 주이고 블랙프라이데이와 겹침. 두 요인을 분리할 수 없음.",
+"2025-12-08":"WAU +6.9%. 11.00 하이라이트(Grim Forest)가 공개된 주이며 이후 6주 연속 WAU 상승.",
+"2025-12-22":"매출 +67%. 연말 시즌과 겹치며 12-28 퓨전 이벤트가 같은 주. 다운로드·WAU 변화는 작아 소비가 기존 이용자에게 몰린 형태.",
+"2026-01-05":"WAU +6.8%. 연초 복귀와 Grim Forest 효과로 보이며, 포럼에서 같은 주에 대응되는 글은 없음.",
+"2026-01-12":"WAU +5.9%로 정점(72만대) 도달. 같은 주 포럼 글은 10.90.0 게시뿐이라 게시일 신뢰도가 낮음.",
+"2026-03-02":"매출 +59%. 11.30 하이라이트(03-05)와 7주년 준비 주간. 다음 주 Pelops 7주년 퓨전.",
+"2026-05-11":"매출 +50%. 11.50 하이라이트(05-07, 자동 등반·보물 티켓)와 Ezio 스포트라이트(05-06) 직후 주.",
+"2026-06-01":"매출 +78%. 스켈레터 복귀(06-02) 주이며 직전 주에 스켈레터·히맨 스포트라이트가 이어짐.",
+"2026-08-17":"다운로드 +225%, WAU +9.4%. Echoes of Oz 대형 이벤트와 11.71 업데이트(08-19)가 시작된 주. 이 기간에서 유일하게 이용자·다운로드가 함께 크게 튐.",
+"2026-08-31":"WAU -6.7%. Echoes of Oz 초반 효과가 빠진 뒤 되돌림. 직전 2주(08-17, 08-24)에 올랐던 만큼 내려옴."
+};
+const rows=[];K.forEach(k=>{WOW[k].forEach((v,i)=>{if(i&&Math.abs(v-ST[k].m)>1.5*ST[k].sd)rows.push({i,k,v})})});
+const wk={};rows.forEach(r=>{(wk[r.i]=wk[r.i]||[]).push(r)});
+document.getElementById("spk").innerHTML=`<tr><th class="l">주 시작</th><th class="l">지표(전주 대비)</th><th class="l">같은 주·직전 주 업데이트/이벤트</th><th class="l">코멘트</th></tr>`+Object.keys(wk).map(Number).sort((a,b)=>a-b).map(i=>{
+ const ev=E.filter(e=>e.i==i||e.i==i-1).map(e=>`${e.i==i-1?"(직전 주) ":""}${e.t}`);
+ return `<tr><td class="l">${L[i].d}</td><td class="l">${wk[i].map(r=>`${NM[r.k]} ${pcs(r.v)}`).join("<br>")}</td><td class="l">${ev.join("<br>")||"-"}</td><td class="l">${(COM[L[i].d]||"").replace(/^(.*?\.)(\s|$)/,"<b class=\"imp\">$1</b>$2")}</td></tr>`}).join("");
+
+// ③ 공통 사항
+document.getElementById("pat").innerHTML=[
+["급등한 주의 공통점",["대부분 신규 모드·콜라보·기념 이벤트가 시작되거나 공개된 주(에일리언, 7주년, 스켈레터 복귀, Echoes of Oz).","매출 급등 5건(11-24, 12-22, 03-02, 05-11, 06-01) 중 11-24와 12-22는 블랙프라이데이·연말과 겹쳐서 이벤트 효과와 계절 효과를 나눌 수 없음.","다운로드까지 함께 튄 경우는 8-17(Echoes of Oz)과 11-24뿐. 신규 유입은 대형 콜라보나 테마가 있을 때만 크게 움직임."]],
+["내려간 주의 공통점",["WAU 하락 두 건(11-10, 08-31)은 모두 직전에 이벤트로 올랐거나 시즌 이벤트가 끝난 직후의 되돌림.","매출과 다운로드는 기준을 넘는 하락이 없었음. 급등 뒤 다음 주에 평소 수준으로 돌아오는 모양.","4월 말 WAU 저점(50만)은 11.20~11.40 구간(QoL·프렌들리 시즌·구독 변경)에 해당하며, 이 구간에는 대형 신규 콘텐츠 발표가 없었음."]],
+["업데이트 유형별 차이",["QoL·밸런스 중심 업데이트(10.80, 10.90, 11.40, 11.75)는 같은 주 변동이 평소 수준.","신규 모드(Grim Forest)는 WAU를 약 6주간 끌어올림(12월 첫 주 53만 → 1월 중순 72만). 이 기간 가장 지속성이 길었음.","콜라보 이벤트는 매출·다운로드가 한 주 안에 급등했다가 빠르게 복귀하는 단기형."]],
+["데이터를 볼 때 주의할 점",["매출 주간 변동폭(표준편차 약 29%)이 WAU(약 4%)보다 훨씬 커서 패키지 판매 시점과 프로모션의 영향이 큼.","이 자료에는 광고 집행, 가격 프로모션, 휴일 정보가 없어서 업데이트 효과만 분리할 수 없음.","마지막 주(09-28)는 집계 미완료로 제외."]]
+].map(c=>`<div class="card"><b>${c[0]}</b><ul class="l" style="margin-top:6px">${c[1].map(t=>`<li>${t}</li>`).join("")}</ul></div>`).join("");
+
+// ④ 월별
+const MO={};L.forEach((r,i)=>{(MO[r.d.slice(0,7)]=MO[r.d.slice(0,7)]||[]).push(i)});
+let prev=null,t=`<tr><th class="l">월</th><th class="l">주요 업데이트·이벤트</th><th>영향도</th><th>WAU 평균(증감)</th><th>WAU 주간 최대</th><th>매출 주평균(증감)</th><th>매출 주간 최대</th><th>다운로드 주평균(증감)</th><th>다운로드 주간 최대</th></tr>`;
+Object.keys(MO).forEach(m=>{const ix=MO[m],ev=E.filter(e=>e.d.startsWith(m)),sc=ev.length?Math.max(...ev.map(e=>e.s)):null;
+ const a={};K.forEach(k=>a[k]=ix.reduce((s,i)=>s+L[i][k],0)/ix.length);
+ const mm=k=>{const v=ix.filter(i=>i>0).map(i=>WOW[k][i]);if(!v.length)return "-";const u=Math.max(...v),d=Math.min(...v);return `<span class="up">▲${Math.max(u,0).toFixed(0)}%</span> <span class="dn">▼${Math.abs(Math.min(d,0)).toFixed(0)}%</span>`};
+ const c=k=>prev?` (${pcs(pc(prev[k],a[k]))})`:"";
+ t+=`<tr><td class="l">${m}</td><td class="l">${ev.map(e=>`${e.m?"<b>":""}${e.d.slice(5)} ${e.t}${e.m?"</b>":""}`).join("<br>")||"-"}</td><td>${sc==null?"-":pill(sc)}</td><td>${f(a.wau)}${c("wau")}</td><td>${mm("wau")}</td><td>$${f(a.rev)}${c("rev")}</td><td>${mm("rev")}</td><td>${f(a.dl)}${c("dl")}</td><td>${mm("dl")}</td></tr>`;prev=a});
+document.getElementById("mon").innerHTML=t;
+
+// ⑤
+const ar=L.map(r=>r.rev/r.wau),A=Math.max(...ar),Z=Math.min(...ar);
+let g=`<line x1="30" x2="415" y1="125" y2="125" stroke="var(--bd)"/><polyline fill="none" stroke="var(--c2)" stroke-width="2" points="${ar.map((v,i)=>(30+i*385/(ar.length-1))+","+(125-(v-Z)/(A-Z)*105)).join(" ")}"/>`;
+g+=`<text x="2" y="24" font-size="10" fill="var(--mut)">$${A.toFixed(1)}</text><text x="2" y="128" font-size="10" fill="var(--mut)">$${Z.toFixed(1)}</text><text x="30" y="144" font-size="10" fill="var(--mut)">${L[0].d.slice(2,7)}</text><text x="415" y="144" font-size="10" text-anchor="end" fill="var(--mut)">${L.at(-1).d.slice(2,7)}</text>`;
+document.getElementById("arp").innerHTML=g;
+document.getElementById("arpn").textContent=`주당 이용자 1명당 매출은 $${Z.toFixed(2)}~$${A.toFixed(2)}. 처음 12주 평균 $${(ar.slice(0,12).reduce((a,b)=>a+b)/12).toFixed(2)}, 마지막 12주 평균 $${(ar.slice(-12).reduce((a,b)=>a+b)/12).toFixed(2)}.`;
+const ty={U:"업데이트",T:"테마·콜라보",E:"챔피언·퓨전"};let tt=`<tr><th class="l">유형</th><th>건수</th><th>WAU</th><th>매출</th><th>다운로드</th></tr>`;
+["U","T","E"].forEach(c=>{const es=E.filter(e=>e.c==c&&e.i>0);const m=k=>es.length?pcs(es.reduce((s,e)=>s+WOW[k][e.i],0)/es.length):"-";tt+=`<tr><td class="l">${ty[c]}</td><td>${es.length}</td><td>${m("wau")}</td><td>${m("rev")}</td><td>${m("dl")}</td></tr>`});
+tt+=`<tr><td class="l">전체 주 평균</td><td>${L.length-1}</td>${K.map(k=>`<td>${pcs(ST[k].m)}</td>`).join("")}</tr>`;document.getElementById("typ").innerHTML=tt;
+document.getElementById("cty").innerHTML=`<tr><th class="l">국가</th><th>매출 합계</th><th>매출 비중</th><th>WAU 비중</th><th>다운로드 비중</th></tr>`+BRK.top.map(r=>`<tr><td class="l">${r.c}</td><td>$${f(r.rev)}</td><td>${r.revp}%</td><td>${r.wau}%</td><td>${r.dl}%</td></tr>`).join("");
+document.getElementById("plt").innerHTML=`<tr><th class="l">플랫폼</th><th>매출</th><th>WAU</th><th>다운로드</th></tr>`+BRK.pl.map(r=>`<tr><td class="l">${r.p}</td><td>${r.rev}%</td><td>${r.wau}%</td><td>${r.dl}%</td></tr>`).join("");
+
+// ⑥ ⑦
+const CT={U:"업데이트",T:"테마·콜라보",E:"챔피언·퓨전"};
+document.getElementById("evt").innerHTML=`<tr><th class="l">게시일</th><th class="l">유형</th><th class="l">내용</th><th class="l">대응 주</th><th>영향도</th></tr>`+E.map(e=>`<tr><td class="l">${e.d}</td><td class="l">${CT[e.c]}</td><td class="l">${e.m?"<b>"+e.t+"</b>":e.t}</td><td class="l">${L[e.i].d}</td><td>${pill(e.s)}</td></tr>`).join("");
+document.getElementById("raw").innerHTML=`<tr><th class="l">주 시작</th><th>WAU</th><th>매출($)</th><th>다운로드</th><th>WAU 전주비</th><th>매출 전주비</th><th>다운로드 전주비</th></tr>`+L.map((r,i)=>`<tr><td class="l">${r.d}</td><td>${f(r.wau)}</td><td>${f(r.rev)}</td><td>${f(r.dl)}</td>${K.map(k=>`<td>${i?pcs(WOW[k][i]):"-"}</td>`).join("")}</tr>`).join("");
+const csv="week,wau,revenue_usd,downloads\n"+D.map(r=>[r.d,r.wau,r.rev,r.dl].join(",")).join("\n");
+document.getElementById("cp").addEventListener("click",()=>{const m=document.getElementById("cpm");try{navigator.clipboard.writeText(csv).then(()=>m.textContent="복사했습니다",()=>m.textContent="복사하지 못했습니다. 아래 표에서 직접 선택하세요.")}catch(e){m.textContent="복사하지 못했습니다. 아래 표에서 직접 선택하세요."}});
+</script></body></html>
